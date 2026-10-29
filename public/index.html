@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos — CampoDirecto y AgroPerfil</title>
+<meta name="description" content="Dos proyectos estudiantiles para el sector agrícola: CampoDirecto conecta el campo con la ciudad sin intermediarios, y AgroPerfil conecta a trabajadores agrícolas con oportunidades de empleo mediante hojas de vida digitales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ BARRA SELECTORA DE PROYECTO (fija) ============ -->
+<nav class="project-switcher" aria-label="Selector de proyecto">
+  <div class="switcher-inner">
+    <button type="button" class="switcher-home is-active" data-view="home" aria-current="page">
+      <svg class="icon" width="18" height="18"><use href="#icon-house"/></svg>
+      <span>Proyectos</span>
+    </button>
+    <div class="switcher-links">
+      <button type="button" class="switcher-btn" data-view="campodirecto" aria-current="false">CampoDirecto</button>
+      <button type="button" class="switcher-btn" data-view="agroperfil" aria-current="false">AgroPerfil</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ SPRITE DE ÍCONOS (oculto, compartido por los dos proyectos) ============ -->
+<svg class="icon-sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="icon-farm" viewBox="0 0 48 48">
+      <polygon points="6,22 22,8 38,22" />
+      <rect x="9" y="22" width="26" height="16" rx="1.5" />
+      <rect x="19" y="29" width="6" height="9" />
+      <path d="M34,10 C40,10 43,16 43,21 C38,21 33,27 32,28 C32,27 28,21 22,21 C22,16 28,10 34,10 Z" class="icon-accent" />
+    </symbol>
+
+    <symbol id="icon-mayorista" viewBox="0 0 48 48">
+      <rect x="3" y="14" width="42" height="6" rx="1" />
+      <rect x="5" y="20" width="38" height="18" rx="1" />
+      <rect x="10" y="29" width="8" height="9" />
+      <rect x="20" y="29" width="8" height="9" />
+      <rect x="30" y="29" width="8" height="9" />
+    </symbol>
+
+    <symbol id="icon-store" viewBox="0 0 48 48">
+      <path d="M4,20 L10,11 L16,20 L22,11 L28,20 L34,11 L40,20 L44,14 L44,20 Z" />
+      <rect x="6" y="20" width="36" height="18" rx="1" />
+      <rect x="19" y="29" width="8" height="9" />
+    </symbol>
+
+    <symbol id="icon-house" viewBox="0 0 48 48">
+      <polygon points="6,22 24,7 42,22" />
+      <rect x="10" y="22" width="28" height="17" rx="1.5" />
+      <rect x="21" y="31" width="6" height="8" />
+      <rect x="14" y="26" width="6" height="6" />
+    </symbol>
+
+    <symbol id="icon-truck" viewBox="0 0 48 48">
+      <rect x="3" y="20" width="15" height="13" rx="2" />
+      <rect x="18" y="13" width="26" height="20" rx="2" />
+      <rect x="6" y="23" width="6" height="5" class="icon-accent" />
+      <circle cx="12" cy="35" r="4.5" />
+      <circle cx="35" cy="35" r="4.5" />
+    </symbol>
+
+    <symbol id="icon-leaf" viewBox="0 0 48 48">
+      <path d="M24,6 C36,6 42,17 42,27 C30,27 24,39 24,42 C24,39 18,27 6,27 C6,17 12,6 24,6 Z" />
+      <path d="M24,10 L24,38" class="icon-vein" />
+    </symbol>
+
+    <symbol id="icon-check" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="21" />
+      <path d="M14,25 L21,32 L34,16" class="icon-check-mark" />
+    </symbol>
+
+    <symbol id="icon-arrow" viewBox="0 0 48 24">
+      <path d="M2,12 H38 M28,3 L40,12 L28,21" class="icon-stroke" />
+    </symbol>
+
+    <symbol id="icon-chevron" viewBox="0 0 24 24">
+      <path d="M6,9 L12,15 L18,9" class="icon-stroke" />
+    </symbol>
+
+    <symbol id="icon-up" viewBox="0 0 24 24">
+      <path d="M5,14 L12,7 L19,14 M12,7 L12,19" class="icon-stroke" />
+    </symbol>
+
+    <symbol id="icon-sprout" viewBox="0 0 48 48">
+      <path d="M24,42 L24,24" class="icon-vein" />
+      <path d="M24,24 C24,12 12,10 6,10 C6,20 12,26 24,24 Z" />
+      <path d="M24,24 C24,14 34,12 41,12 C41,21 33,28 24,24 Z" class="icon-accent" />
+    </symbol>
+
+    <!-- ---- íconos nuevos para AgroPerfil ---- -->
+    <symbol id="icon-worker" viewBox="0 0 48 48">
+      <circle cx="24" cy="14" r="8" />
+      <path d="M8,42 C8,29.5 15,24 24,24 C33,24 40,29.5 40,42 Z" />
+      <path d="M12,12 C12,6.5 17,3 24,3 C31,3 36,6.5 36,12 L30,12 C30,9 27.5,7 24,7 C20.5,7 18,9 18,12 Z" class="icon-accent" />
+    </symbol>
+
+    <symbol id="icon-cv" viewBox="0 0 48 48">
+      <rect x="7" y="4" width="34" height="40" rx="3" fill="none" class="icon-stroke" />
+      <circle cx="24" cy="15" r="6" class="icon-accent" />
+      <rect x="15" y="27" width="18" height="3" />
+      <rect x="15" y="33" width="18" height="3" />
+      <rect x="15" y="39" width="11" height="3" />
+    </symbol>
+
+    <symbol id="icon-search" viewBox="0 0 48 48">
+      <circle cx="20" cy="20" r="14" fill="none" class="icon-stroke" />
+      <path d="M30,30 L42,42" class="icon-stroke" />
+    </symbol>
+
+    <symbol id="icon-star" viewBox="0 0 48 48">
+      <path d="M24,3 L29.9,17.3 L45,18.6 L33.5,28.6 L37,43.4 L24,35.4 L11,43.4 L14.5,28.6 L3,18.6 L18.1,17.3 Z" />
+    </symbol>
+
+    <symbol id="icon-briefcase" viewBox="0 0 48 48">
+      <path d="M18,15 L18,10 C18,8 19.5,6.5 21.5,6.5 L26.5,6.5 C28.5,6.5 30,8 30,10 L30,15" fill="none" class="icon-stroke" />
+      <rect x="5" y="15" width="38" height="25" rx="3" />
+      <rect x="20" y="24" width="8" height="6" class="icon-accent" />
+    </symbol>
+
+    <symbol id="icon-shield" viewBox="0 0 48 48">
+      <path d="M24,4 L41,10.5 L41,21 C41,32.5 33.5,40.5 24,44 C14.5,40.5 7,32.5 7,21 L7,10.5 Z" />
+      <path d="M15,23.5 L21,29.5 L34,15.5" fill="none" class="icon-check-mark" />
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ PORTADA: ELEGIR PROYECTO ============ -->
+<div class="app-view is-active" id="view-home">
+  <section class="launcher">
+    <div class="launcher-inner">
+      <p class="launcher-eyebrow reveal">Proyectos</p>
+      <h1 class="launcher-title reveal">Dos ideas para fortalecer el campo colombiano</h1>
+      <p class="launcher-lead reveal">Selecciona un proyecto para conocerlo de principio a fin: qué problema resuelve, cómo funciona y qué lo hace diferente.</p>
+
+      <div class="launcher-grid">
+        <article class="launcher-card launcher-card-cd reveal" data-view="campodirecto">
+          <span class="launcher-card-icon"><svg class="icon" width="30" height="30"><use href="#icon-leaf"/></svg></span>
+          <h3>CampoDirecto</h3>
+          <p class="launcher-card-tag">Del campo a tu mesa, sin intermediarios</p>
+          <p class="launcher-card-desc">Conecta directamente a los campesinos de Antioquia con la ciudad: productos frescos, precios justos y entrega a domicilio.</p>
+          <button type="button" class="btn btn-primary" data-view="campodirecto">Ver CampoDirecto →</button>
+        </article>
+
+        <article class="launcher-card launcher-card-ap reveal" data-view="agroperfil">
+          <span class="launcher-card-icon"><svg class="icon" width="30" height="30"><use href="#icon-cv"/></svg></span>
+          <h3>AgroPerfil</h3>
+          <p class="launcher-card-tag">Del campo a tu próximo empleo</p>
+          <p class="launcher-card-desc">Conecta a trabajadores agrícolas con dueños de fincas: hojas de vida digitales y una contratación más rápida y confiable.</p>
+          <button type="button" class="btn btn-primary" data-view="agroperfil">Ver AgroPerfil →</button>
+        </article>
+      </div>
+
+      <p class="launcher-note reveal">Los dos proyectos viven en esta misma página — usa la barra superior para moverte entre ellos cuando quieras.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     PROYECTO 1: CAMPODIRECTO
+     ============================================================ -->
+<div class="app-view" id="view-campodirecto">
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<!-- ============ ENCABEZADO ============ -->
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark"><svg class="icon" width="28" height="28"><use href="#icon-leaf"/></svg></span>
+      <span class="brand-text">
+        <span class="brand-name">CampoDirecto</span>
+        <span class="brand-tag">De la tierra a tu mesa</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Abrir menú">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+
+    <nav class="primary-nav" id="primaryNav" aria-label="Navegación principal">
+      <a href="#nosotros" class="nav-link">Quiénes somos</a>
+      <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+      <a href="#mision-vision" class="nav-link">Misión y visión</a>
+      <a href="#beneficios" class="nav-link">Beneficios</a>
+      <a href="#preguntas" class="nav-link">Preguntas</a>
+      <a href="#unete" class="nav-link nav-cta">Únete</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Presentación">
+    <div class="wrap hero-inner">
+      <div class="hero-copy reveal">
+        <p class="tag tag-hand">Itagüí, Antioquia</p>
+        <h1 class="hero-title">Lo que cosecha el campo, <em>directo</em> a tu mesa.</h1>
+        <p class="hero-sub">Conectamos a los campesinos de Antioquia con tu cocina: productos frescos, precios justos y cero intermediarios quedándose con la ganancia de por medio.</p>
+        <div class="hero-actions">
+          <a href="#unete" class="btn btn-primary" data-target-input="rolComprador">Quiero comprar fresco</a>
+          <a href="#unete" class="btn btn-ghost" data-target-input="rolCampesino">Vendo mis cosechas</a>
+        </div>
+        <div class="hero-stats">
+          <span class="chip">3 estudiantes</span>
+          <span class="chip">100% Itagüí, Antioquia</span>
+          <span class="chip">Directo del campo</span>
+        </div>
+      </div>
+
+      <div class="hero-diagram reveal" aria-hidden="false">
+        <div class="route-row route-before">
+          <p class="route-label">Antes: el precio sube en cada parada</p>
+          <div class="route-track">
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-farm"/></svg>
+            <svg class="icon icon-arrow-sm" width="32" height="16"><use href="#icon-arrow"/></svg>
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-mayorista"/></svg>
+            <svg class="icon icon-arrow-sm" width="32" height="16"><use href="#icon-arrow"/></svg>
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-store"/></svg>
+            <svg class="icon icon-arrow-sm" width="32" height="16"><use href="#icon-arrow"/></svg>
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-house"/></svg>
+            <span class="price-tag price-tag-bad">×5</span>
+          </div>
+          <span class="route-strike" aria-hidden="true"></span>
+        </div>
+
+        <div class="route-row route-after">
+          <p class="route-label">Con CampoDirecto: una sola ruta</p>
+          <div class="route-track route-track-direct">
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-farm"/></svg>
+            <svg class="icon icon-truck-mid" width="44" height="44"><use href="#icon-truck"/></svg>
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-house"/></svg>
+            <span class="price-tag price-tag-good">precio justo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg class="divider" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,70 L0,40 L80,18 L160,38 L240,10 L330,36 L420,16 L520,40 L610,14 L700,38 L800,12 L900,40 L1000,16 L1100,38 L1200,20 L1200,70 Z"/>
+    </svg>
+  </section>
+
+  <!-- ============ QUIÉNES SOMOS ============ -->
+  <section class="section" id="nosotros">
+    <div class="wrap">
+      <p class="eyebrow reveal">Nuestra historia</p>
+      <h2 class="section-title reveal">¿Quiénes somos?</h2>
+
+      <div class="story-grid">
+        <p class="story-text reveal">
+          Somos tres estudiantes de la Institución Educativa Antonio José de Sucre, en Itagüí.
+          Identificamos un problema en la forma en que los campesinos venden sus alimentos hacia
+          la ciudad, y decidimos hacer algo al respecto: crear un servicio de transporte de
+          alimentos que conecte directamente a los proveedores del campo con quienes quieren
+          comprar en la ciudad, a un precio más justo y accesible para ambos lados.
+        </p>
+        <p class="story-text reveal">
+          Así beneficiamos tanto a los campesinos como a los consumidores: mayores ganancias para
+          quien cultiva, mejores precios para quien compra. Gracias a nuestro sistema de transporte
+          fomentamos la compra local, fortalecemos la economía de la zona y promovemos el consumo
+          de alimentos saludables y naturales — sin que tengas que salir de casa, porque cada
+          producto llega a tu puerta previamente revisado y certificado.
+        </p>
+        <p class="story-text reveal">
+          Este proyecto nació de algo que nos pareció muy injusto: vimos que los campesinos venden
+          sus cosechas a muy bajo precio en las plazas mayoristas, que luego las revenden a tiendas
+          y minimercados a casi cinco veces el precio original. Quienes más trabajan — sembrando,
+          cosechando y seleccionando los mejores productos — son quienes menos ganan. Quisimos
+          cambiar esa historia.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CÓMO FUNCIONA ============ -->
+  <section class="section section-alt" id="como-funciona">
+    <div class="wrap">
+      <p class="eyebrow reveal">El proceso</p>
+      <h2 class="section-title reveal">Cómo funciona</h2>
+      <p class="section-lead reveal">Quitamos del camino los pasos que solo inflan el precio. El campesino cultiva, nosotros transportamos, tú recibes: todo en una sola ruta directa.</p>
+
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step-num">1</span>
+          <svg class="icon icon-md"><use href="#icon-sprout"/></svg>
+          <h3>Se cosecha en el campo</h3>
+          <p>El campesino recolecta y empaca sus productos frescos del día.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">2</span>
+          <svg class="icon icon-md"><use href="#icon-farm"/></svg>
+          <h3>Recogemos en la finca</h3>
+          <p>Pasamos directamente por la vereda o finca a recoger el pedido.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">3</span>
+          <svg class="icon icon-md"><use href="#icon-check"/></svg>
+          <h3>Revisamos calidad</h3>
+          <p>Verificamos y certificamos cada producto antes de que salga a ruta.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">4</span>
+          <svg class="icon icon-md"><use href="#icon-house"/></svg>
+          <h3>Llega a tu puerta</h3>
+          <p>Tu pedido llega fresco a casa, sin que tengas que moverte de ahí.</p>
+        </li>
+      </ol>
+
+      <div class="calculator reveal">
+        <div class="calc-head">
+          <h3>Calcula cuánto cambia el precio</h3>
+          <p>Mueve el control para ver qué pasa con el mismo producto, hoy y con CampoDirecto.</p>
+        </div>
+
+        <label class="calc-label" for="calcPrecio">Precio en tienda o supermercado</label>
+        <input type="range" id="calcPrecio" min="2000" max="60000" step="500" value="15000">
+        <p class="calc-value"><span id="calcPrecioValor">$15.000</span> COP</p>
+
+        <div class="calc-bars">
+          <div class="calc-block">
+            <p class="calc-block-title">Lo que gana hoy el campesino</p>
+            <div class="bar-track"><div class="bar bar-bad" id="barFarmerHoy"></div></div>
+            <p class="bar-value" id="valFarmerHoy">$0</p>
+          </div>
+          <div class="calc-block">
+            <p class="calc-block-title">Lo que gana con CampoDirecto</p>
+            <div class="bar-track"><div class="bar bar-good" id="barFarmerDirecto"></div></div>
+            <p class="bar-value" id="valFarmerDirecto">$0</p>
+          </div>
+          <div class="calc-block">
+            <p class="calc-block-title">Lo que pagarías con CampoDirecto</p>
+            <div class="bar-track"><div class="bar bar-neutral" id="barComprador"></div></div>
+            <p class="bar-value" id="valComprador">$0</p>
+          </div>
+        </div>
+        <p class="calc-note">*Estimación ilustrativa basada en la diferencia de precios típica entre el campo y la ciudad descrita en nuestro proyecto. No es una cifra garantizada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MISIÓN Y VISIÓN ============ -->
+  <section class="section" id="mision-vision">
+    <div class="wrap">
+      <p class="eyebrow reveal">Hacia dónde vamos</p>
+      <h2 class="section-title reveal">Misión y visión</h2>
+
+      <div class="mv-grid">
+        <article class="mv-card reveal">
+          <svg class="icon icon-md"><use href="#icon-sprout"/></svg>
+          <h3>Misión</h3>
+          <p>
+            Brindar a nuestros clientes productos frescos, de alta calidad y a precios justos,
+            conectando directamente al productor con el consumidor final de forma rápida y
+            confiable. Buscamos promover una alimentación saludable y accesible para todas las
+            familias, rompiendo la idea de que comer sano es costoso o difícil de conseguir. Lo
+            logramos garantizando productos naturales que vienen directo del campo y fomentando el
+            consumo responsable en la zona urbana, para que cada persona sea más consciente de
+            dónde viene lo que come y del impacto positivo que puede generar en la vida de un
+            agricultor.
+          </p>
+        </article>
+
+        <article class="mv-card mv-card-dark reveal">
+          <span class="tag tag-hand tag-on-dark">Hacia 2037</span>
+          <svg class="icon icon-md"><use href="#icon-house"/></svg>
+          <h3>Visión</h3>
+          <p>
+            Para 2037 queremos ser una empresa reconocida a nivel local por ofrecer productos
+            frescos, confiables y de excelente calidad: el aliado número uno tanto de las familias
+            en sus casas como de los pequeños productores del campo. Vamos a expandir nuestras
+            rutas para cubrir más zonas y conectar a más campesinos antioqueños con nuevos
+            compradores en la ciudad, destacándonos por nuestro compromiso con la salud de las
+            personas, el cuidado del medio ambiente y el apoyo constante al campo. Queremos ser la
+            prueba de que un proyecto nacido de estudiantes puede transformar la economía local.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BENEFICIOS ============ -->
+  <section class="section section-alt" id="beneficios">
+    <div class="wrap">
+      <p class="eyebrow reveal">Lo que cambia</p>
+      <h2 class="section-title reveal">Beneficios para todos</h2>
+
+      <div class="benef-grid">
+        <div class="benef-card reveal">
+          <h3>Para los campesinos</h3>
+          <ul class="check-list">
+            <li><svg class="icon icon-check-sm"><use href="#icon-check"/></svg>Mejores ganancias por cada cosecha, sin intermediarios quedándose con el margen.</li>
+            <li><svg class="icon icon-check-sm"><use href="#icon-check"/></svg>Acceso directo a nuevos compradores en la ciudad.</li>
+            <li><svg class="icon icon-check-sm"><use href="#icon-check"/></svg>Reconocimiento por la calidad de su trabajo y sus productos.</li>
+          </ul>
+        </div>
+        <div class="benef-card reveal">
+          <h3>Para tu hogar</h3>
+          <ul class="check-list">
+            <li><svg class="icon icon-check-sm"><use href="#icon-check"/></svg>Precios más justos y accesibles, sin el sobrecosto de la cadena tradicional.</li>
+            <li><svg class="icon icon-check-sm"><use href="#icon-check"/></svg>Productos frescos, naturales y certificados antes de llegar a tu puerta.</li>
+            <li><svg class="icon icon-check-sm"><use href="#icon-check"/></svg>Cero salidas necesarias: todo llega a domicilio.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREGUNTAS FRECUENTES ============ -->
+  <section class="section" id="preguntas">
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow reveal">Antes de escribirnos</p>
+      <h2 class="section-title reveal">Preguntas frecuentes</h2>
+
+      <div class="accordion reveal">
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span>¿De dónde vienen los productos?</span>
+            <svg class="icon icon-chevron"><use href="#icon-chevron"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p>Vienen directo de campesinos y veredas de Antioquia. Antes de salir hacia tu casa,
+            cada producto pasa por una revisión y certificación de calidad.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span>¿Por qué los precios son más justos?</span>
+            <svg class="icon icon-chevron"><use href="#icon-chevron"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p>Porque eliminamos los pasos que multiplican el precio original hasta casi cinco
+            veces antes de llegar a una tienda. Esa diferencia se reparte de forma más justa entre
+            el campesino y tú.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span>¿Tengo que salir de casa para comprar?</span>
+            <svg class="icon icon-chevron"><use href="#icon-chevron"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p>No. Todo el proceso es a domicilio: tú pides, nosotros recogemos en el campo y te lo
+            entregamos en la puerta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ÚNETE / FORMULARIO ============ -->
+  <section class="section section-dark" id="unete">
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow eyebrow-on-dark reveal">Hagamos parte de esto</p>
+      <h2 class="section-title section-title-on-dark reveal">Únete a CampoDirecto</h2>
+      <p class="section-lead section-lead-on-dark reveal">Cuéntanos si quieres comprar fresco o si tienes una cosecha para vender. Te escribimos pronto.</p>
+
+      <form class="join-form reveal" id="joinForm" novalidate
+            data-msg-comprador="Nos pondremos en contacto contigo para coordinar tu primer pedido fresco."
+            data-msg-campesino="Nos pondremos en contacto contigo para coordinar la recogida de tus productos.">
+        <div class="role-toggle" role="radiogroup" aria-label="¿Qué quieres hacer?">
+          <input type="radio" name="rol" id="rolComprador" value="comprador" checked>
+          <label for="rolComprador">Quiero comprar</label>
+          <input type="radio" name="rol" id="rolCampesino" value="campesino">
+          <label for="rolCampesino">Quiero vender mis cosechas</label>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" name="correo" required autocomplete="email">
+          </div>
+          <div class="field" data-field-for="comprador">
+            <label for="ubicacionComprador">Barrio o ciudad</label>
+            <input type="text" id="ubicacionComprador" name="ubicacionComprador">
+          </div>
+          <div class="field" data-field-for="campesino" hidden>
+            <label for="ubicacionCampesino">Vereda o municipio</label>
+            <input type="text" id="ubicacionCampesino" name="ubicacionCampesino">
+          </div>
+          <div class="field field-wide" data-field-for="comprador">
+            <label for="interesComprador">¿Qué productos te interesan?</label>
+            <textarea id="interesComprador" name="interesComprador" rows="3" placeholder="Frutas, verduras, panela, café..."></textarea>
+          </div>
+          <div class="field field-wide" data-field-for="campesino" hidden>
+            <label for="interesCampesino">¿Qué cultivas y en qué cantidad aproximada?</label>
+            <textarea id="interesCampesino" name="interesCampesino" rows="3" placeholder="Ej: tomate, 50 kg por semana"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="joinSubmit">Enviar</button>
+      </form>
+
+      <div class="join-success" id="joinSuccess" hidden>
+        <svg class="icon icon-lg"><use href="#icon-check"/></svg>
+        <h3>¡Listo, recibimos tu información!</h3>
+        <p id="joinSuccessText" data-role="success-text">Nos pondremos en contacto contigo muy pronto.</p>
+        <button type="button" class="btn btn-ghost btn-on-dark" id="joinReset" data-role="reset">Enviar otra respuesta</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ PIE DE PÁGINA ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark"><svg class="icon" width="24" height="24"><use href="#icon-leaf"/></svg></span>
+      <div>
+        <p class="brand-name">CampoDirecto</p>
+        <p class="brand-tag">De la tierra a tu mesa</p>
+      </div>
+    </div>
+
+    <nav class="footer-links" aria-label="Enlaces del pie de página">
+      <a href="#nosotros">Quiénes somos</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#mision-vision">Misión y visión</a>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#unete">Únete</a>
+    </nav>
+
+    <div class="footer-contact">
+      <p>contacto@campodirecto.ejemplo</p>
+      <p>+57 300 000 0000</p>
+      <p class="footer-note">Datos de contacto de ejemplo — reemplázalos por los reales.</p>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <p>© <span class="year-now"></span> CampoDirecto — Proyecto de estudiantes de la Institución Educativa Antonio José de Sucre, Itagüí, Antioquia.</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Volver arriba" hidden>
+  <svg class="icon"><use href="#icon-up"/></svg>
+</button>
+
+</div><!-- /#view-campodirecto -->
+
+<!-- ============================================================
+     PROYECTO 2: AGROPERFIL
+     ============================================================ -->
+<div class="app-view" id="view-agroperfil">
+
+<a class="skip-link" href="#ap-contenido">Saltar al contenido</a>
+
+<!-- ============ ENCABEZADO ============ -->
+<header class="site-header" id="ap-top">
+  <div class="wrap header-inner">
+    <a href="#ap-top" class="brand">
+      <span class="brand-mark"><svg class="icon" width="28" height="28"><use href="#icon-cv"/></svg></span>
+      <span class="brand-text">
+        <span class="brand-name">AgroPerfil</span>
+        <span class="brand-tag">Del campo a tu próximo empleo</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="apNavToggle" aria-expanded="false" aria-controls="apPrimaryNav" aria-label="Abrir menú">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+
+    <nav class="primary-nav" id="apPrimaryNav" aria-label="Navegación principal">
+      <a href="#ap-nosotros" class="nav-link">Quiénes somos</a>
+      <a href="#ap-como-funciona" class="nav-link">Cómo funciona</a>
+      <a href="#ap-objetivos" class="nav-link">Nuestro enfoque</a>
+      <a href="#ap-mision-vision" class="nav-link">Misión y visión</a>
+      <a href="#ap-preguntas" class="nav-link">Preguntas</a>
+      <a href="#ap-unete" class="nav-link nav-cta">Únete</a>
+    </nav>
+  </div>
+</header>
+
+<main id="ap-contenido">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" aria-label="Presentación">
+    <div class="wrap hero-inner">
+      <div class="hero-copy reveal">
+        <p class="tag tag-hand">Empleo agrícola digital</p>
+        <h1 class="hero-title">Tu experiencia en el campo, en un solo <em>perfil</em>.</h1>
+        <p class="hero-sub">Creamos un puente digital entre los trabajadores agrícolas y los dueños de fincas: hojas de vida claras para unos, personal confiable para otros.</p>
+        <div class="hero-actions">
+          <a href="#ap-unete" class="btn btn-primary" data-target-input="apRolTrabajador">Crear mi hoja de vida</a>
+          <a href="#ap-unete" class="btn btn-ghost" data-target-input="apRolFinca">Busco contratar personal</a>
+        </div>
+        <div class="hero-stats">
+          <span class="chip">Hoja de vida digital</span>
+          <span class="chip">Alcance regional</span>
+          <span class="chip">Conexión directa</span>
+        </div>
+      </div>
+
+      <div class="hero-diagram reveal" aria-hidden="false">
+        <div class="route-row route-before">
+          <p class="route-label">Antes: recorrer finca por finca, sin garantía</p>
+          <div class="route-track">
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-worker"/></svg>
+            <svg class="icon icon-arrow-sm" width="32" height="16"><use href="#icon-arrow"/></svg>
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-farm"/></svg>
+            <svg class="icon icon-arrow-sm" width="32" height="16"><use href="#icon-arrow"/></svg>
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-farm"/></svg>
+            <svg class="icon icon-arrow-sm" width="32" height="16"><use href="#icon-arrow"/></svg>
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-farm"/></svg>
+            <span class="price-tag price-tag-bad">sin respuesta</span>
+          </div>
+          <span class="route-strike" aria-hidden="true"></span>
+        </div>
+
+        <div class="route-row route-after">
+          <p class="route-label">Con AgroPerfil: un perfil, conexión directa</p>
+          <div class="route-track route-track-direct">
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-worker"/></svg>
+            <svg class="icon icon-truck-mid" width="44" height="44"><use href="#icon-cv"/></svg>
+            <svg class="icon icon-lg" width="40" height="40"><use href="#icon-farm"/></svg>
+            <span class="price-tag price-tag-good">match directo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg class="divider" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,70 L0,40 L80,18 L160,38 L240,10 L330,36 L420,16 L520,40 L610,14 L700,38 L800,12 L900,40 L1000,16 L1100,38 L1200,20 L1200,70 Z"/>
+    </svg>
+  </section>
+
+  <!-- ============ QUIÉNES SOMOS ============ -->
+  <section class="section" id="ap-nosotros">
+    <div class="wrap">
+      <p class="eyebrow reveal">Nuestra propuesta</p>
+      <h2 class="section-title reveal">¿Quiénes somos?</h2>
+
+      <div class="story-grid">
+        <p class="story-text reveal">
+          En AgroPerfil somos una empresa tecnológica comprometida con el desarrollo del sector
+          agrícola y con el bienestar de quienes trabajan en el campo. Nacimos para resolver una
+          de las principales dificultades del sector: la falta de un medio organizado y confiable
+          para conectar a los trabajadores rurales con los dueños de fincas que buscan personal
+          capacitado.
+        </p>
+        <p class="story-text reveal">
+          Nuestra aplicación permite que los trabajadores agrícolas creen una hoja de vida digital
+          donde registran su experiencia laboral, los cultivos en los que han trabajado, el manejo
+          de maquinaria, sus habilidades, conocimientos, certificaciones y referencias — mostrando
+          su trayectoria de forma clara y profesional, sin tener que recorrer finca por finca en
+          busca de empleo.
+        </p>
+        <p class="story-text reveal">
+          Al mismo tiempo, AgroPerfil está pensada para los dueños de fincas, administradores y
+          empresas del sector que necesitan contratar personal de forma rápida y confiable. A
+          través de la plataforma pueden consultar perfiles, comparar candidatos según sus
+          necesidades y contactar directamente a quienes mejor se ajusten al trabajo requerido.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CÓMO FUNCIONA ============ -->
+  <section class="section section-alt" id="ap-como-funciona">
+    <div class="wrap">
+      <p class="eyebrow reveal">El proceso</p>
+      <h2 class="section-title reveal">Cómo funciona</h2>
+      <p class="section-lead reveal">Diseñamos un proceso simple para que crear un perfil o encontrar personal confiable no tome más que unos minutos.</p>
+
+      <div class="mv-grid">
+        <article class="mv-card reveal">
+          <svg class="icon icon-md"><use href="#icon-worker"/></svg>
+          <h3>El problema</h3>
+          <p>
+            Hoy, muchos trabajadores agrícolas deben recorrer finca por finca, depender de
+            recomendaciones o esperar a que surja una oportunidad: una búsqueda lenta y
+            desorganizada. Del otro lado, los dueños de fincas tampoco cuentan con una forma fácil
+            de conocer la experiencia real de quienes buscan trabajo.
+          </p>
+        </article>
+        <article class="mv-card mv-card-dark reveal">
+          <svg class="icon icon-md"><use href="#icon-cv"/></svg>
+          <h3>Nuestra solución</h3>
+          <p>
+            AgroPerfil conecta directamente a ambas partes: los trabajadores crean una hoja de
+            vida digital con su experiencia y habilidades, y los empleadores consultan esa base de
+            datos, filtran según sus necesidades y contactan directamente a los candidatos más
+            adecuados.
+          </p>
+        </article>
+      </div>
+
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step-num">1</span>
+          <svg class="icon icon-md"><use href="#icon-cv"/></svg>
+          <h3>Crea tu hoja de vida</h3>
+          <p>Registra tu experiencia, los cultivos que conoces, manejo de maquinaria, habilidades y certificaciones.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">2</span>
+          <svg class="icon icon-md"><use href="#icon-briefcase"/></svg>
+          <h3>Publica o explora ofertas</h3>
+          <p>Las fincas publican sus vacantes disponibles; los trabajadores exploran oportunidades cerca de su zona.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">3</span>
+          <svg class="icon icon-md"><use href="#icon-search"/></svg>
+          <h3>Compara y contacta</h3>
+          <p>Los empleadores filtran perfiles por experiencia, ubicación o habilidades y contactan directamente a quien buscan.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">4</span>
+          <svg class="icon icon-md"><use href="#icon-star"/></svg>
+          <h3>Califica la experiencia</h3>
+          <p>Al terminar cada trabajo, ambas partes se califican para fortalecer la confianza dentro de la plataforma.</p>
+        </li>
+      </ol>
+
+      <div class="preview-demo reveal">
+        <div class="preview-card">
+          <p class="preview-label">Vista previa · Hoja de vida</p>
+          <div class="preview-profile">
+            <span class="preview-avatar"><svg width="26" height="26"><use href="#icon-worker"/></svg></span>
+            <div>
+              <p class="preview-name">Nombre del trabajador</p>
+              <p class="preview-role">Trabajador agrícola · 5 años de experiencia</p>
+            </div>
+          </div>
+          <div class="preview-tags">
+            <span class="chip">Café</span>
+            <span class="chip">Manejo de maquinaria</span>
+            <span class="chip">Fumigación</span>
+          </div>
+        </div>
+        <div class="preview-card">
+          <p class="preview-label">Vista previa · Panel de finca</p>
+          <div class="preview-filters">
+            <div class="preview-filter-row"><span>Cultivo</span> <strong>Café</strong></div>
+            <div class="preview-filter-row"><span>Ubicación</span> <strong>Menos de 20 km</strong></div>
+            <div class="preview-filter-row"><span>Candidatos disponibles</span> <strong>12</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NUESTRO ENFOQUE: OBJETIVOS Y VALORES ============ -->
+  <section class="section" id="ap-objetivos">
+    <div class="wrap">
+      <p class="eyebrow reveal">Hacia dónde apuntamos</p>
+      <h2 class="section-title reveal">Nuestro enfoque</h2>
+      <p class="section-lead reveal">Nuestro objetivo es desarrollar una plataforma digital que facilite la conexión entre trabajadores agrícolas y dueños de fincas mediante hojas de vida digitales, mejorando las oportunidades de empleo y haciendo más organizados, eficientes y confiables los procesos de contratación en el sector.</p>
+
+      <h3 class="reveal">Objetivos específicos</h3>
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step-num">1</span>
+          <svg class="icon icon-md"><use href="#icon-cv"/></svg>
+          <h3>Hojas de vida fáciles de crear</h3>
+          <p>Una aplicación sencilla donde los trabajadores registran y actualizan su experiencia, habilidades y referencias, dando mayor visibilidad a su perfil.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">2</span>
+          <svg class="icon icon-md"><use href="#icon-search"/></svg>
+          <h3>Búsqueda rápida y organizada</h3>
+          <p>Una herramienta para que los dueños de fincas consulten perfiles y elijan a quien mejor se adapte a las necesidades de su finca o cultivo.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">3</span>
+          <svg class="icon icon-md"><use href="#icon-briefcase"/></svg>
+          <h3>Contratación más moderna</h3>
+          <p>Impulsamos herramientas digitales que modernicen la conexión entre trabajadores y empleadores en el sector rural.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">4</span>
+          <svg class="icon icon-md"><use href="#icon-sprout"/></svg>
+          <h3>Crecimiento sostenible del campo</h3>
+          <p>Una plataforma que genere más oportunidades laborales, promueva relaciones de confianza y apoye el desarrollo del sector agrícola.</p>
+        </li>
+      </ol>
+
+      <h3 class="reveal">Nuestros valores</h3>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <svg class="icon icon-md"><use href="#icon-check"/></svg>
+          <h3>Puntualidad</h3>
+          <p>Promovemos que los trabajadores cumplan los horarios y responsabilidades asignadas, generando confianza y organización en las fincas.</p>
+        </div>
+        <div class="value-card reveal">
+          <svg class="icon icon-md"><use href="#icon-star"/></svg>
+          <h3>Honestidad</h3>
+          <p>Buscamos que trabajadores y empleadores manejen información real y transparente sobre experiencia, pagos y condiciones de trabajo.</p>
+        </div>
+        <div class="value-card reveal">
+          <svg class="icon icon-md"><use href="#icon-worker"/></svg>
+          <h3>Respeto</h3>
+          <p>Promovemos el buen trato entre trabajadores y dueños de fincas, valorando el esfuerzo y la dignidad del trabajo rural.</p>
+        </div>
+        <div class="value-card reveal">
+          <svg class="icon icon-md"><use href="#icon-shield"/></svg>
+          <h3>Confianza y seguridad</h3>
+          <p>Creamos un ambiente seguro donde las contrataciones son más confiables gracias a perfiles verificados y recomendaciones.</p>
+        </div>
+        <div class="value-card reveal">
+          <svg class="icon icon-md"><use href="#icon-leaf"/></svg>
+          <h3>Responsabilidad</h3>
+          <p>Impulsamos el cumplimiento de las tareas agrícolas con calidad y eficiencia para mejorar la productividad en el campo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MISIÓN Y VISIÓN ============ -->
+  <section class="section section-alt" id="ap-mision-vision">
+    <div class="wrap">
+      <p class="eyebrow reveal">Hacia dónde vamos</p>
+      <h2 class="section-title reveal">Misión y visión</h2>
+
+      <div class="mv-grid">
+        <article class="mv-card reveal">
+          <svg class="icon icon-md"><use href="#icon-cv"/></svg>
+          <h3>Misión</h3>
+          <p>
+            AgroPerfil es una empresa tecnológica comprometida con el fortalecimiento del sector
+            agrícola mediante una plataforma digital que conecta a trabajadores del campo con
+            dueños de fincas y empresas del sector agropecuario. Facilitamos la creación y
+            consulta de hojas de vida digitales, para que los trabajadores muestren su experiencia
+            y trayectoria, y los empleadores encuentren al personal más adecuado de forma rápida,
+            organizada y confiable. Promovemos la responsabilidad, la honestidad, el respeto y la
+            transparencia, contribuyendo al desarrollo del sector agrícola en Colombia.
+          </p>
+        </article>
+
+        <article class="mv-card mv-card-dark reveal">
+          <span class="tag tag-hand tag-on-dark">Hacia 2032</span>
+          <svg class="icon icon-md"><use href="#icon-sprout"/></svg>
+          <h3>Visión</h3>
+          <p>
+            Para el año 2032, AgroPerfil será reconocida como una de las plataformas líderes en
+            Colombia para la gestión del empleo agrícola, destacándose por la calidad de sus
+            servicios, la confianza de sus usuarios y su innovación constante. Aspiramos a
+            conectar a miles de trabajadores y empleadores en todo el territorio nacional,
+            incorporando nuevas funcionalidades para la validación de perfiles y el
+            fortalecimiento de las competencias laborales del campo colombiano.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREGUNTAS FRECUENTES ============ -->
+  <section class="section" id="ap-preguntas">
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow reveal">Antes de escribirnos</p>
+      <h2 class="section-title reveal">Preguntas frecuentes</h2>
+
+      <div class="accordion reveal">
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span>¿Qué puedo registrar en mi hoja de vida digital?</span>
+            <svg class="icon icon-chevron"><use href="#icon-chevron"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p>Tu experiencia laboral, los cultivos en los que has trabajado, el manejo de
+            maquinaria, tus habilidades, conocimientos, certificaciones y referencias — todo lo
+            que muestre tu trayectoria de forma clara y profesional.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span>¿Quién puede usar AgroPerfil?</span>
+            <svg class="icon icon-chevron"><use href="#icon-chevron"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p>Trabajadores agrícolas que buscan empleo, y también dueños de fincas,
+            administradores o empresas del sector que necesitan contratar personal de forma
+            rápida y confiable.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span>¿Cómo encuentran las fincas al trabajador adecuado?</span>
+            <svg class="icon icon-chevron"><use href="#icon-chevron"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p>Consultando la base de perfiles, filtrando según sus necesidades — experiencia,
+            ubicación o tipo de trabajo — y comparando candidatos antes de contactar directamente
+            a quien mejor se ajuste.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">
+            <span>¿Cómo se genera confianza entre ambas partes?</span>
+            <svg class="icon icon-chevron"><use href="#icon-chevron"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p>A través de perfiles verificados y de un sistema de recomendaciones y
+            calificaciones: al terminar cada trabajo, trabajador y empleador se califican
+            mutuamente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ÚNETE / FORMULARIO ============ -->
+  <section class="section section-dark" id="ap-unete">
+    <div class="wrap wrap-narrow">
+      <p class="eyebrow eyebrow-on-dark reveal">Hagamos parte de esto</p>
+      <h2 class="section-title section-title-on-dark reveal">Únete a AgroPerfil</h2>
+      <p class="section-lead section-lead-on-dark reveal">Cuéntanos si buscas empleo en el campo o si necesitas contratar personal para tu finca. Te escribimos pronto.</p>
+
+      <form class="join-form reveal" id="apJoinForm" novalidate
+            data-msg-trabajador="Nos pondremos en contacto contigo para ayudarte a completar tu hoja de vida digital."
+            data-msg-finca="Nos pondremos en contacto contigo para conocer el perfil de personal que necesitas.">
+        <div class="role-toggle" role="radiogroup" aria-label="¿Qué quieres hacer?">
+          <input type="radio" name="rol" id="apRolTrabajador" value="trabajador" checked>
+          <label for="apRolTrabajador">Busco empleo</label>
+          <input type="radio" name="rol" id="apRolFinca" value="finca">
+          <label for="apRolFinca">Quiero contratar</label>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="apNombre">Nombre completo</label>
+            <input type="text" id="apNombre" name="nombre" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="apCorreo">Correo electrónico</label>
+            <input type="email" id="apCorreo" name="correo" required autocomplete="email">
+          </div>
+          <div class="field" data-field-for="trabajador">
+            <label for="apUbicacionTrabajador">Vereda o municipio</label>
+            <input type="text" id="apUbicacionTrabajador" name="ubicacionTrabajador">
+          </div>
+          <div class="field" data-field-for="finca" hidden>
+            <label for="apUbicacionFinca">Nombre y ubicación de la finca</label>
+            <input type="text" id="apUbicacionFinca" name="ubicacionFinca">
+          </div>
+          <div class="field field-wide" data-field-for="trabajador">
+            <label for="apInteresTrabajador">¿Qué experiencia, cultivos o habilidades tienes?</label>
+            <textarea id="apInteresTrabajador" name="interesTrabajador" rows="3" placeholder="Ej: 5 años en café, manejo de guadaña, fumigación..."></textarea>
+          </div>
+          <div class="field field-wide" data-field-for="finca" hidden>
+            <label for="apInteresFinca">¿Qué tipo de personal necesitas?</label>
+            <textarea id="apInteresFinca" name="interesFinca" rows="3" placeholder="Ej: 2 recolectores de café para la próxima cosecha"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+      </form>
+
+      <div class="join-success" id="apJoinSuccess" hidden>
+        <svg class="icon icon-lg"><use href="#icon-check"/></svg>
+        <h3>¡Listo, recibimos tu información!</h3>
+        <p data-role="success-text">Nos pondremos en contacto contigo muy pronto.</p>
+        <button type="button" class="btn btn-ghost btn-on-dark" data-role="reset">Enviar otra respuesta</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ PIE DE PÁGINA ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark"><svg class="icon" width="24" height="24"><use href="#icon-cv"/></svg></span>
+      <div>
+        <p class="brand-name">AgroPerfil</p>
+        <p class="brand-tag">Del campo a tu próximo empleo</p>
+      </div>
+    </div>
+
+    <nav class="footer-links" aria-label="Enlaces del pie de página">
+      <a href="#ap-nosotros">Quiénes somos</a>
+      <a href="#ap-como-funciona">Cómo funciona</a>
+      <a href="#ap-objetivos">Nuestro enfoque</a>
+      <a href="#ap-mision-vision">Misión y visión</a>
+      <a href="#ap-unete">Únete</a>
+    </nav>
+
+    <div class="footer-contact">
+      <p>contacto@agroperfil.ejemplo</p>
+      <p>+57 300 000 0000</p>
+      <p class="footer-note">Datos de contacto de ejemplo — reemplázalos por los reales.</p>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <p>© <span class="year-now"></span> AgroPerfil — proyecto estudiantil para el empleo agrícola digital.</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Volver arriba" hidden>
+  <svg class="icon"><use href="#icon-up"/></svg>
+</button>
+
+</div><!-- /#view-agroperfil -->
+
+<script src="script.js"></script>
+</body>
+</html>
